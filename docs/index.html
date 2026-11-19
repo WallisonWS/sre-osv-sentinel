@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRE &amp; OSV Sentinel — Google SRE Burn-Rate Engine &amp; Live OSV.dev Scanner</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #060a14; color: #f8fafc; min-height: 100vh; padding: 28px 20px; background-image: radial-gradient(circle at 12% 0%, rgba(66,133,244,0.14), transparent 40%), radial-gradient(circle at 88% 8%, rgba(52,168,83,0.12), transparent 40%); }
+    .wrap { max-width: 1140px; margin: 0 auto; }
+    .hero { background: linear-gradient(135deg, rgba(66,133,244,0.16), rgba(52,168,83,0.12)); border: 1px solid rgba(66,133,244,0.4); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .hero h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 6px; }
+    .hero p { color: #94a3b8; font-size: 0.92rem; max-width: 680px; }
+    .btn { background: linear-gradient(135deg, #4285f4, #34a853); color: #fff; font-weight: 700; padding: 9px 16px; border-radius: 9px; text-decoration: none; border: none; cursor: pointer; font-size: 0.83rem; }
+    .btn-ghost { background: #111827; border: 1px solid #26334d; color: #e2e8f0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 18px; }
+    .card { background: #0f1626; border: 1px solid #23304d; border-radius: 14px; padding: 20px; margin-bottom: 18px; }
+    .card h2 { font-size: 1rem; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 14px; }
+    label { font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 5px; font-weight: 600; }
+    input, select, textarea { width: 100%; background: #080d18; border: 1px solid #23304d; color: #f1f5f9; border-radius: 8px; padding: 9px 11px; font-family: Consolas, monospace; font-size: 0.83rem; }
+    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+    .stat { background: #080d18; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
+    .stat small { color: #64748b; text-transform: uppercase; font-size: 0.68rem; font-weight: 700; display: block; }
+    .stat strong { color: #60a5fa; font-family: monospace; font-size: 1.05rem; }
+    pre { background: #080d18; border: 1px solid #23304d; border-radius: 8px; padding: 14px; font-family: Consolas, monospace; font-size: 0.8rem; color: #7dd3fc; overflow-x: auto; white-space: pre-wrap; max-height: 310px; }
+    .badge-crit { background: rgba(239,68,68,0.2); color: #f87171; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+    .badge-ok { background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 10px; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid #1e293b; text-align: left; }
+    th { color: #94a3b8; font-size: 0.72rem; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>📈 SRE &amp; OSV Sentinel — Google SRE Workbook &amp; Live OSV.dev Scanner</h1>
+        <p>Engine 1: <strong>Google SRE Multi-Window, Multi-Burn-Rate SLO Calculator</strong> generating Prometheus &amp; Cloud Monitoring alerts. Engine 2: <strong>Real-Time Google OSV.dev API</strong> Supply-Chain Vulnerability Scanner for <code>npm</code>, <code>PyPI</code>, <code>Go</code> &amp; <code>Flutter/Pub</code>.</p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <a href="https://github.com/WallisonWS/sre-osv-sentinel" target="_blank" class="btn">⭐ Star on GitHub</a>
+        <a href="https://wallisonws.github.io/aegis-llm-guard/" target="_blank" class="btn btn-ghost">🛡️ Aegis LLM Guard</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Engine 1: Google SRE SLO Multi-Burn-Rate Calculator -->
+      <div class="card">
+        <h2>⚙️ Google SRE Multi-Burn-Rate SLO Engine</h2>
+        <div class="row">
+          <div>
+            <label>Service Name</label>
+            <input id="svcName" value="checkout-api" />
+          </div>
+          <div>
+            <label>SLO Target (%)</label>
+            <select id="sloTarget">
+              <option value="99.9" selected>99.9% (Three Nines)</option>
+              <option value="99.95">99.95% (Enterprise)</option>
+              <option value="99.99">99.99% (Four Nines)</option>
+              <option value="99.5">99.5% (Standard)</option>
+            </select>
+          </div>
+          <div>
+            <label>Rolling Window</label>
+            <select id="sloDays">
+              <option value="30" selected>30 Days</option>
+              <option value="28">28 Days</option>
+              <option value="7">7 Days</option>
+            </select>
+          </div>
+        </div>
+        <div class="stat-row" id="sloStats"></div>
+        <label>Generated Prometheus / Google Cloud Monitoring Burn-Rate Alert (YAML)</label>
+        <pre id="promOut"></pre>
+      </div>
+
+      <!-- Engine 2: Live Google OSV.dev Supply-Chain Scanner -->
+      <div class="card">
+        <h2>
+          <span>🔎 Live Google OSV.dev Dependency Scanner</span>
+          <button class="btn" id="scanOsvBtn">⚡ Query api.osv.dev Live</button>
+        </h2>
+        <label>Packages to audit (format: ecosystem:name@version — npm, PyPI, Go, Pub)</label>
+        <textarea id="osvInput" rows="5">npm:lodash@4.17.19
+PyPI:django@3.2.12
+Go:golang.org/x/net@0.7.0
+Pub:http@0.13.5</textarea>
+        <div id="osvStatus" style="margin:10px 0; font-size:0.83rem; color:#94a3b8;">Click "Query api.osv.dev Live" to run a real-time supply-chain CVE query against Google's OSV database.</div>
+        <table>
+          <thead><tr><th>Ecosystem</th><th>Package</th><th>Version</th><th>OSV / CVE Findings</th></tr></thead>
+          <tbody id="osvTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateSlo() {
+      const svc = document.getElementById('svcName').value.trim() || 'api-service';
+      const target = parseFloat(document.getElementById('sloTarget').value);
+      const days = parseInt(document.getElementById('sloDays').value, 10);
+      const eb = (100 - target) / 100;
+      const downMin = (days * 24 * 60 * eb).toFixed(2);
+      const downSecYear = Math.round(365 * 24 * 3600 * eb);
+
+      document.getElementById('sloStats').innerHTML = `
+        <div class="stat"><small>Error Budget</small><strong>${(eb * 100).toFixed(3)}%</strong></div>
+        <div class="stat"><small>Downtime / ${days}d</small><strong>${downMin} min</strong></div>
+        <div class="stat"><small>14.4x Burn (1h/5m)</small><strong>${(eb * 14.4 * 100).toFixed(2)}% err</strong></div>`;
+
+      document.getElementById('promOut').textContent = `# Google SRE Workbook Ch.5 — Multi-Window Multi-Burn-Rate Alerts
+groups:
+  - name: ${svc}_slo_burn_rates
+    rules:
+      # Tier 1: Critical Page — 2% Error Budget consumed in 1h (14.4x burn)
+      - alert: ${svc}_CriticalErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors:ratio_rate1h{service="${svc}"} > ${(14.4 * eb).toFixed(6)}
+            and
+            job:slo_errors:ratio_rate5m{service="${svc}"} > ${(14.4 * eb).toFixed(6)}
+          )
+        labels:
+          severity: page
+          slo_target: "${target}%"
+
+      # Tier 2: High Page — 5% Error Budget consumed in 6h (6x burn)
+      - alert: ${svc}_HighErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors:ratio_rate6h{service="${svc}"} > ${(6.0 * eb).toFixed(6)}
+            and
+            job:slo_errors:ratio_rate30m{service="${svc}"} > ${(6.0 * eb).toFixed(6)}
+          )
+        labels:
+          severity: page`;
+    }
+
+    async function runOsvQuery() {
+      const statusEl = document.getElementById('osvStatus');
+      const tbody = document.getElementById('osvTableBody');
+      const lines = document.getElementById('osvInput').value.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const queries = [];
+      for (const line of lines) {
+        const m = line.match(/^([^:]+):([^@]+)@(.+)$/);
+        if (m) queries.push({ package: { ecosystem: m[1].trim(), name: m[2].trim() }, version: m[3].trim() });
+      }
+      statusEl.textContent = `⏳ Querying Google https://api.osv.dev/v1/querybatch for ${queries.length} packages...`;
+      try {
+        const res = await fetch('https://api.osv.dev/v1/querybatch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ queries })
+        });
+        const data = await res.json();
+        const results = data.results || [];
+        let totalVulns = 0;
+        tbody.innerHTML = queries.map((q, idx) => {
+          const vulns = (results[idx] && results[idx].vulns) || [];
+          totalVulns += vulns.length;
+          const badge = vulns.length
+            ? `<span class="badge-crit">${vulns.length} vuln(s): ${vulns.slice(0, 3).map(v => v.id).join(', ')}</span>`
+            : `<span class="badge-ok">CLEAN (0 CVEs)</span>`;
+          return `<tr><td>${q.package.ecosystem}</td><td><strong>${q.package.name}</strong></td><td>${q.version}</td><td>${badge}</td></tr>`;
+        }).join('');
+        statusEl.textContent = `✅ Live response from Google OSV.dev API — scanned ${queries.length} packages, found ${totalVulns} vulnerability advisory(ies).`;
+      } catch (err) {
+        statusEl.textContent = `⚠️ Error reaching OSV API: ${err.message}`;
+      }
+    }
+
+    ['svcName', 'sloTarget', 'sloDays'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateSlo);
+      document.getElementById(id).addEventListener('change', updateSlo);
+    });
+    document.getElementById('scanOsvBtn').addEventListener('click', runOsvQuery);
+    updateSlo();
+    runOsvQuery();
+  </script>
+</body>
+</html>
